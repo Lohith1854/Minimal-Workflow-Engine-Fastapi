@@ -1,45 +1,61 @@
-This project is a simple workflow/graph engine built using FastAPI as required in the Tredence Coding Assignment. It allows defining nodes, connecting them, updating shared state across steps, looping until conditions are met, and running workflows through APIs.
+<h1>Tredence Coding Assignment – Minimal Workflow/Graph Engine</h1>
 
----
+<p>
+This project is a simple workflow/graph engine built using FastAPI as required in the 
+Tredence Coding Assignment. It allows defining nodes, connecting them, updating shared 
+state across steps, looping until conditions are met, and running workflows through APIs.
+</p>
 
-## 🚀 Features Implemented
+<hr>
 
-- Nodes as Python functions
-- Shared state dictionary flowing between nodes
-- Edges using "next" to move from node to node
-- Looping support (run a node until a condition becomes false)
-- Basic branching logic
-- Tool registry for node functions
-- FastAPI endpoints for creating and running workflows
+<h2>🚀 Features Implemented</h2>
+<ul>
+  <li>Nodes as Python functions</li>
+  <li>Shared state dictionary flowing between nodes</li>
+  <li>Edges using "next" to move from node to node</li>
+  <li>Looping support (run a node until a condition becomes false)</li>
+  <li>Basic branching logic</li>
+  <li>Tool registry for node functions</li>
+  <li>FastAPI endpoints for creating and running workflows</li>
+</ul>
 
----
+<hr>
 
-## 🛠 How to Run the Project
+<h2>🛠 How to Run the Project</h2>
 
-1. Create and activate a virtual environment (Windows):
+<ol>
+  <li>Create and activate a virtual environment (Windows):<br><br>
+    <pre>
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+    </pre>
+  </li>
 
-   python -m venv venv
-   .\venv\Scripts\Activate.ps1
+  <li>Install dependencies:<br><br>
+    <pre>
+pip install -r requirements.txt
+    </pre>
+  </li>
 
-2. Install dependencies:
+  <li>Start the server:<br><br>
+    <pre>
+uvicorn app.main:app --reload --port 8000
+    </pre>
+  </li>
 
-   pip install -r requirements.txt
+  <li>Open Swagger UI:<br><br>
+    <a href="http://127.0.0.1:8000/docs">http://127.0.0.1:8000/docs</a>
+  </li>
+</ol>
 
-3. Start the server:
+<hr>
 
-   uvicorn app.main:app --reload --port 8000
+<h2>🧪 How to Test Workflow in Swagger UI</h2>
 
-4. Open Swagger UI in your browser:
+<h3>Step 1 — Create a graph</h3>
+<p>Open <b>POST /graph/create</b> and paste:</p>
 
-   http://127.0.0.1:8000/docs
-
----
-
-## 🧪 How to Test Workflow in Swagger UI
-
-### Step 1 — Create a graph
-Open **POST /graph/create** and paste:
-
+<pre>
 {
   "nodes": {
     "extract": {"fn_name": "extract_functions", "next": "check"},
@@ -52,31 +68,34 @@ Open **POST /graph/create** and paste:
     }
   }
 }
+</pre>
 
-Copy the returned graph_id.
+<p>Copy the returned <code>graph_id</code>.</p>
 
-### Step 2 — Run the workflow
+<h3>Step 2 — Run the workflow</h3>
 
-Open **POST /graph/run** and paste:
-
+<pre>
 {
   "graph_id": "YOUR_GRAPH_ID",
   "initial_state": {}
 }
+</pre>
 
-You will receive:
-- final_state
-- execution log
-- run_id
+<p>You will receive:</p>
+<ul>
+  <li>final_state</li>
+  <li>execution log</li>
+  <li>run_id</li>
+</ul>
 
-### Step 3 — View run state again
+<h3>Step 3 — View run state</h3>
+<p>Use <b>GET /graph/state/{run_id}</b>.</p>
 
-Use **GET /graph/state/{run_id}**.
+<hr>
 
----
+<h2>📂 Project Structure</h2>
 
-## 📂 Project Structure
-
+<pre>
 app/
   main.py
   engine/
@@ -87,19 +106,22 @@ app/
     code_review.py
 requirements.txt
 README.md
+</pre>
 
----
+<hr>
 
-## 🔧 Possible Improvements (If More Time)
+<h2>🔧 Possible Improvements (If More Time)</h2>
+<ul>
+  <li>Database storage for graphs and runs</li>
+  <li>WebSocket logs to stream execution</li>
+  <li>More advanced branching logic</li>
+  <li>Async background execution</li>
+</ul>
 
-- Database storage for graphs and runs
-- WebSocket logs to stream execution
-- More advanced branching logic
-- Async background execution
+<hr>
 
----
-
-## 👤 Author
-
-Lohith Narayana
+<h2>👤 Author</h2>
+<p>
+<b>Chaitanya</b><br>
 Submitted as part of the Tredence AI Engineering Internship Coding Assignment.
+</p>
