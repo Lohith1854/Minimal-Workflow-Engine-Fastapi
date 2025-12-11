@@ -122,6 +122,6 @@ README.md
 
 <h2>👤 Author</h2>
 <p>
-<b>Chaitanya</b><br>
+<b>Narayana Lohith</b><br>
 Submitted as part of the Tredence AI Engineering Internship Coding Assignment.
 </p>
